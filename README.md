@@ -5,7 +5,7 @@
     codex, openai-codex, codex-pet, codex-pets, custom-pet, pokemon, pixel-art, spritesheet, pokeapi, pokemon-showdown, fan-art, pet-pack
 -->
 
-# Codex PokéPets
+<h1 align="center">Codex PokéPets</h1>
 
 <p align="center">
   <a href="pets/"><img src="https://img.shields.io/badge/pets-1738-ff5d5d" alt="1738 pets"></a>
