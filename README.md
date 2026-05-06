@@ -15,15 +15,6 @@ existing animated Pokémon sprites — no AI generation, no re-drawing.
 - **2D pixel-art** — 734 pets, Gen 1–5, classic Black/White animations
 - **3D animated** — 1004 pets, Gen 1–9, slug suffix `-3d`
 
-| Gen | 2D | 3D |
-|-----|----|----|
-| 1 (Kanto) / 2 (Johto) / 3 (Hoenn) / 4 (Sinnoh) / 5 (Unova) | 649 + 85 forms | 649 |
-| 6 (Kalos) / 7 (Alola) / 8 (Galar) / 9 (Paldea) | — | 355 |
-| **Total** | **734** | **1004** |
-
-3D variants use the `-3d` suffix (`charizard-3d`). Forms use PokeAPI's
-hyphen convention (`deoxys-attack`, `unown-z`, `arceus-fire`).
-
 ## Install
 
 Install one or more pets directly into `~/.codex/pets/` without cloning
@@ -34,6 +25,9 @@ curl -fsSL https://raw.githubusercontent.com/dnnyngyen/codex-pokepets/main/insta
 ```
 
 <p><img src="pets/charizard/preview.gif" width="80" alt="charizard"></p>
+
+> 3D variants use the `-3d` suffix (`charizard-3d`). Forms use PokeAPI's
+> hyphen convention (`deoxys-attack`, `unown-z`, `arceus-fire`).
 
 For the 3D animated version, add `-3d`:
 
