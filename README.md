@@ -84,19 +84,45 @@ To uninstall: `rm -rf ~/.codex/pets/<slug>`.
 
 ### 2D (Gen 1–5, PokeAPI BW animated)
 
-| | | | |
-|---|---|---|---|
-| <a href="pets/charizard/"><img src="pets/charizard/preview.gif" width="80"><br>charizard</a> | <a href="pets/pikachu/"><img src="pets/pikachu/preview.gif" width="80"><br>pikachu</a> | <a href="pets/mewtwo/"><img src="pets/mewtwo/preview.gif" width="80"><br>mewtwo</a> | <a href="pets/typhlosion/"><img src="pets/typhlosion/preview.gif" width="80"><br>typhlosion</a> |
-| <a href="pets/lugia/"><img src="pets/lugia/preview.gif" width="80"><br>lugia</a> | <a href="pets/rayquaza/"><img src="pets/rayquaza/preview.gif" width="80"><br>rayquaza</a> | <a href="pets/lucario/"><img src="pets/lucario/preview.gif" width="80"><br>lucario</a> | <a href="pets/garchomp/"><img src="pets/garchomp/preview.gif" width="80"><br>garchomp</a> |
-| <a href="pets/zoroark/"><img src="pets/zoroark/preview.gif" width="80"><br>zoroark</a> | <a href="pets/zekrom/"><img src="pets/zekrom/preview.gif" width="80"><br>zekrom</a> | <a href="pets/giratina-origin/"><img src="pets/giratina-origin/preview.gif" width="80"><br>giratina-origin</a> | <a href="pets/arceus-fire/"><img src="pets/arceus-fire/preview.gif" width="80"><br>arceus-fire</a> |
+<p>
+  <a href="pets/charizard/"><img src="pets/charizard/preview.gif" width="80" alt="charizard"></a>
+  <a href="pets/pikachu/"><img src="pets/pikachu/preview.gif" width="80" alt="pikachu"></a>
+  <a href="pets/mewtwo/"><img src="pets/mewtwo/preview.gif" width="80" alt="mewtwo"></a>
+  <a href="pets/typhlosion/"><img src="pets/typhlosion/preview.gif" width="80" alt="typhlosion"></a>
+</p>
+<p>
+  <a href="pets/lugia/"><img src="pets/lugia/preview.gif" width="80" alt="lugia"></a>
+  <a href="pets/rayquaza/"><img src="pets/rayquaza/preview.gif" width="80" alt="rayquaza"></a>
+  <a href="pets/lucario/"><img src="pets/lucario/preview.gif" width="80" alt="lucario"></a>
+  <a href="pets/garchomp/"><img src="pets/garchomp/preview.gif" width="80" alt="garchomp"></a>
+</p>
+<p>
+  <a href="pets/zoroark/"><img src="pets/zoroark/preview.gif" width="80" alt="zoroark"></a>
+  <a href="pets/zekrom/"><img src="pets/zekrom/preview.gif" width="80" alt="zekrom"></a>
+  <a href="pets/giratina-origin/"><img src="pets/giratina-origin/preview.gif" width="80" alt="giratina-origin"></a>
+  <a href="pets/arceus-fire/"><img src="pets/arceus-fire/preview.gif" width="80" alt="arceus-fire"></a>
+</p>
 
 ### 3D (Gen 1–9, Pokemon Showdown animated)
 
-| | | | |
-|---|---|---|---|
-| <a href="pets/charizard-3d/"><img src="pets/charizard-3d/preview.gif" width="80"><br>charizard-3d</a> | <a href="pets/mewtwo-3d/"><img src="pets/mewtwo-3d/preview.gif" width="80"><br>mewtwo-3d</a> | <a href="pets/lucario-3d/"><img src="pets/lucario-3d/preview.gif" width="80"><br>lucario-3d</a> | <a href="pets/greninja-3d/"><img src="pets/greninja-3d/preview.gif" width="80"><br>greninja-3d</a> |
-| <a href="pets/decidueye-3d/"><img src="pets/decidueye-3d/preview.gif" width="80"><br>decidueye-3d</a> | <a href="pets/zacian-3d/"><img src="pets/zacian-3d/preview.gif" width="80"><br>zacian-3d</a> | <a href="pets/eternatus-3d/"><img src="pets/eternatus-3d/preview.gif" width="80"><br>eternatus-3d</a> | <a href="pets/cinderace-3d/"><img src="pets/cinderace-3d/preview.gif" width="80"><br>cinderace-3d</a> |
-| <a href="pets/sprigatito-3d/"><img src="pets/sprigatito-3d/preview.gif" width="80"><br>sprigatito-3d</a> | <a href="pets/koraidon-3d/"><img src="pets/koraidon-3d/preview.gif" width="80"><br>koraidon-3d</a> | <a href="pets/gholdengo-3d/"><img src="pets/gholdengo-3d/preview.gif" width="80"><br>gholdengo-3d</a> | <a href="pets/dragapult-3d/"><img src="pets/dragapult-3d/preview.gif" width="80"><br>dragapult-3d</a> |
+<p>
+  <a href="pets/charizard-3d/"><img src="pets/charizard-3d/preview.gif" width="80" alt="charizard-3d"></a>
+  <a href="pets/mewtwo-3d/"><img src="pets/mewtwo-3d/preview.gif" width="80" alt="mewtwo-3d"></a>
+  <a href="pets/lucario-3d/"><img src="pets/lucario-3d/preview.gif" width="80" alt="lucario-3d"></a>
+  <a href="pets/greninja-3d/"><img src="pets/greninja-3d/preview.gif" width="80" alt="greninja-3d"></a>
+</p>
+<p>
+  <a href="pets/decidueye-3d/"><img src="pets/decidueye-3d/preview.gif" width="80" alt="decidueye-3d"></a>
+  <a href="pets/zacian-3d/"><img src="pets/zacian-3d/preview.gif" width="80" alt="zacian-3d"></a>
+  <a href="pets/eternatus-3d/"><img src="pets/eternatus-3d/preview.gif" width="80" alt="eternatus-3d"></a>
+  <a href="pets/cinderace-3d/"><img src="pets/cinderace-3d/preview.gif" width="80" alt="cinderace-3d"></a>
+</p>
+<p>
+  <a href="pets/sprigatito-3d/"><img src="pets/sprigatito-3d/preview.gif" width="80" alt="sprigatito-3d"></a>
+  <a href="pets/koraidon-3d/"><img src="pets/koraidon-3d/preview.gif" width="80" alt="koraidon-3d"></a>
+  <a href="pets/gholdengo-3d/"><img src="pets/gholdengo-3d/preview.gif" width="80" alt="gholdengo-3d"></a>
+  <a href="pets/dragapult-3d/"><img src="pets/dragapult-3d/preview.gif" width="80" alt="dragapult-3d"></a>
+</p>
 
 ## Browse
 
