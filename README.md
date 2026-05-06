@@ -84,57 +84,19 @@ To uninstall: `rm -rf ~/.codex/pets/<slug>`.
 
 ### 2D (Gen 1–5, PokeAPI BW animated)
 
-<p>
-  <a href="pets/charizard/"><img src="pets/charizard/preview.gif" width="80" alt="charizard"></a>
-  <a href="pets/lucario/"><img src="pets/lucario/preview.gif" width="80" alt="lucario"></a>
-  <a href="pets/rayquaza/"><img src="pets/rayquaza/preview.gif" width="80" alt="rayquaza"></a>
-  <a href="pets/garchomp/"><img src="pets/garchomp/preview.gif" width="80" alt="garchomp"></a>
-</p>
-<p>
-  <a href="pets/umbreon/"><img src="pets/umbreon/preview.gif" width="80" alt="umbreon"></a>
-  <a href="pets/gengar/"><img src="pets/gengar/preview.gif" width="80" alt="gengar"></a>
-  <a href="pets/mewtwo/"><img src="pets/mewtwo/preview.gif" width="80" alt="mewtwo"></a>
-  <a href="pets/tyranitar/"><img src="pets/tyranitar/preview.gif" width="80" alt="tyranitar"></a>
-</p>
-<p>
-  <a href="pets/bulbasaur/"><img src="pets/bulbasaur/preview.gif" width="80" alt="bulbasaur"></a>
-  <a href="pets/lugia/"><img src="pets/lugia/preview.gif" width="80" alt="lugia"></a>
-  <a href="pets/chandelure/"><img src="pets/chandelure/preview.gif" width="80" alt="chandelure"></a>
-  <a href="pets/pikachu/"><img src="pets/pikachu/preview.gif" width="80" alt="pikachu"></a>
-</p>
-<p>
-  <a href="pets/eevee/"><img src="pets/eevee/preview.gif" width="80" alt="eevee"></a>
-  <a href="pets/luxray/"><img src="pets/luxray/preview.gif" width="80" alt="luxray"></a>
-  <a href="pets/zoroark/"><img src="pets/zoroark/preview.gif" width="80" alt="zoroark"></a>
-  <a href="pets/flygon/"><img src="pets/flygon/preview.gif" width="80" alt="flygon"></a>
-</p>
+<p align="center"><img src="assets/featured-2d.gif" alt="featured 2D pets" width="640"></p>
+
+Featured: charizard, lucario, rayquaza, garchomp, umbreon, gengar, mewtwo,
+tyranitar, bulbasaur, lugia, chandelure, pikachu, eevee, luxray, zoroark,
+flygon.
 
 ### 3D (Gen 1–9, Pokemon Showdown animated)
 
-<p>
-  <a href="pets/greninja-3d/"><img src="pets/greninja-3d/preview.gif" width="80" alt="greninja-3d"></a>
-  <a href="pets/lucario-3d/"><img src="pets/lucario-3d/preview.gif" width="80" alt="lucario-3d"></a>
-  <a href="pets/mimikyu-3d/"><img src="pets/mimikyu-3d/preview.gif" width="80" alt="mimikyu-3d"></a>
-  <a href="pets/charizard-3d/"><img src="pets/charizard-3d/preview.gif" width="80" alt="charizard-3d"></a>
-</p>
-<p>
-  <a href="pets/umbreon-3d/"><img src="pets/umbreon-3d/preview.gif" width="80" alt="umbreon-3d"></a>
-  <a href="pets/sylveon-3d/"><img src="pets/sylveon-3d/preview.gif" width="80" alt="sylveon-3d"></a>
-  <a href="pets/garchomp-3d/"><img src="pets/garchomp-3d/preview.gif" width="80" alt="garchomp-3d"></a>
-  <a href="pets/rayquaza-3d/"><img src="pets/rayquaza-3d/preview.gif" width="80" alt="rayquaza-3d"></a>
-</p>
-<p>
-  <a href="pets/gardevoir-3d/"><img src="pets/gardevoir-3d/preview.gif" width="80" alt="gardevoir-3d"></a>
-  <a href="pets/gengar-3d/"><img src="pets/gengar-3d/preview.gif" width="80" alt="gengar-3d"></a>
-  <a href="pets/dragapult-3d/"><img src="pets/dragapult-3d/preview.gif" width="80" alt="dragapult-3d"></a>
-  <a href="pets/tyranitar-3d/"><img src="pets/tyranitar-3d/preview.gif" width="80" alt="tyranitar-3d"></a>
-</p>
-<p>
-  <a href="pets/mewtwo-3d/"><img src="pets/mewtwo-3d/preview.gif" width="80" alt="mewtwo-3d"></a>
-  <a href="pets/eevee-3d/"><img src="pets/eevee-3d/preview.gif" width="80" alt="eevee-3d"></a>
-  <a href="pets/pikachu-3d/"><img src="pets/pikachu-3d/preview.gif" width="80" alt="pikachu-3d"></a>
-  <a href="pets/aegislash-3d/"><img src="pets/aegislash-3d/preview.gif" width="80" alt="aegislash-3d"></a>
-</p>
+<p align="center"><img src="assets/featured-3d.gif" alt="featured 3D pets" width="640"></p>
+
+Featured: greninja, lucario, mimikyu, charizard, umbreon, sylveon, garchomp,
+rayquaza, gardevoir, gengar, dragapult, tyranitar, mewtwo, eevee, pikachu,
+aegislash. (All install with `<name>-3d`.)
 
 ## Browse
 
