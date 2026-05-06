@@ -1,6 +1,6 @@
 <!--
   Suggested GitHub repo description (one line, ~120 chars):
-    1738 drop-in Codex pets: 2D pixel-art (Gen 1–5) + 3D community-animated (Gen 1–9). One curl install.
+    Every Pokémon as a Codex pet: 2D pixel-art (Gen 1–5) + 3D community-animated (Gen 1–9). One curl install.
   Suggested topics:
     codex, openai-codex, codex-pet, codex-pets, custom-pet, pokemon, pixel-art, spritesheet, pokeapi, pokemon-showdown, fan-art, pet-pack
 -->
@@ -9,11 +9,11 @@
 
 <p align="center"><img src="assets/hero.gif" alt="codex-pokepets hero" width="640"></p>
 
-**1738 drop-in [Codex](https://github.com/openai/codex) pets** sourced from
-existing animated Pokémon sprites — no AI generation, no re-drawing.
+**Every Pokémon as a [Codex](https://github.com/openai/codex) pet**,
+sourced from existing animated sprites. No AI generation, no re-drawing.
 
-- **2D pixel-art** — 734 pets, Gen 1–5, classic Black/White animations
-- **3D animated** — 1004 pets, Gen 1–9, slug suffix `-3d`
+- **2D pixel-art**: 649 Gen 1–5 Pokémon plus 85 alt forms
+- **3D animated**: 1004 Gen 1–9 Pokémon (use `-3d` suffix)
 
 ## Install
 
