@@ -90,15 +90,6 @@ Resolution rules (no flags, pure positional):
 
 Implementation: Python snippet against `pets.json`. A name that exactly matches a 2D base species expands to its 2D family. A name that exactly matches a 3D / form / form-3d entry installs only that. A name that doesn't match any slug but matches a `species_slug` (the Gen 6+ case) expands via that mapping.
 
-## Things to avoid
-
-- **Don't add a build pipeline back.** This repo intentionally ships prebuilt pets only. Users won't run scripts, and the source GIFs (~150MB) are not committed.
-- **Don't AI-generate sprites.** The pets are fan-curated from existing animated sprites. Generated content would change the licensing story.
-- **Don't hand-edit `pets.json`.** It's the source of truth for both installers. If a pet is added or removed, the registry must be regenerated against `pets/` — not patched.
-- **Don't write per-pet README files.** None of the peer multi-pet repos do this. Top-level README + `pets.json` is the documentation surface.
-- **Don't introduce a `<slug>--<author>` suffix.** That convention is specific to the `legeling/awesome-codex-pet` gallery submission flow. Multi-pet repos use plain slugs.
-- **Don't ship `data/` or `scripts/`.** Removed intentionally — this is a finished pack, not a generator.
-
 ## Source attribution
 
 - 2D sprites © Nintendo / Game Freak / Creatures Inc., from [PokeAPI/sprites](https://github.com/PokeAPI/sprites) (Gen 5 BW animated).
