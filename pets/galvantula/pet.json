@@ -1,0 +1,6 @@
+{
+  "id": "galvantula",
+  "displayName": "Galvantula",
+  "description": "When attacked, they create an electric barrier by spitting out many electrically charged threads.",
+  "spritesheetPath": "spritesheet.webp"
+}

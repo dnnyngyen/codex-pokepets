@@ -1,0 +1,6 @@
+{
+  "id": "zubat-3d",
+  "displayName": "Zubat (3D)",
+  "description": "It checks its surroundings and location using reflections of the ultrasonic waves from its mouth.",
+  "spritesheetPath": "spritesheet.webp"
+}

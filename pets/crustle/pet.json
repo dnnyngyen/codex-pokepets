@@ -1,0 +1,6 @@
+{
+  "id": "crustle",
+  "displayName": "Crustle",
+  "description": "Competing for territory, Crustle fight viciously. The one whose boulder is broken is the loser of the battle.",
+  "spritesheetPath": "spritesheet.webp"
+}

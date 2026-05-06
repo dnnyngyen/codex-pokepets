@@ -1,0 +1,6 @@
+{
+  "id": "ledian-3d",
+  "displayName": "Ledian (3D)",
+  "description": "It uses starlight as energy. When more stars appear at night, the patterns on its back grow larger.",
+  "spritesheetPath": "spritesheet.webp"
+}

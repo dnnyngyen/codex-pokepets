@@ -1,0 +1,6 @@
+{
+  "id": "servine-3d",
+  "displayName": "Servine (3D)",
+  "description": "It moves along the ground as if sliding. Its swift movements befuddle its foes, and it then attacks with a vine whip.",
+  "spritesheetPath": "spritesheet.webp"
+}

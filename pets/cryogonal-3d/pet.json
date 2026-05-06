@@ -1,0 +1,6 @@
+{
+  "id": "cryogonal-3d",
+  "displayName": "Cryogonal (3D)",
+  "description": "When its body temperature goes up, it turns into steam and vanishes. When its temperature lowers, it returns to ice.",
+  "spritesheetPath": "spritesheet.webp"
+}

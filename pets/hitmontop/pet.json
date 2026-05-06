@@ -1,0 +1,6 @@
+{
+  "id": "hitmontop",
+  "displayName": "Hitmontop",
+  "description": "It fights while spinning like a top. The centrifugal force boosts its destructive power by ten.",
+  "spritesheetPath": "spritesheet.webp"
+}

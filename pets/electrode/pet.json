@@ -1,0 +1,6 @@
+{
+  "id": "electrode",
+  "displayName": "Electrode",
+  "description": "It is known to drift on winds if it is bloated to bursting with stored electricity.",
+  "spritesheetPath": "spritesheet.webp"
+}

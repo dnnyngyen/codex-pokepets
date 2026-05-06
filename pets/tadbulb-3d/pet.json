@@ -1,0 +1,6 @@
+{
+  "id": "tadbulb-3d",
+  "displayName": "Tadbulb (3D)",
+  "description": "Tadbulb shakes its tail to generate electricity. If it senses danger, it will make its head blink on and off to alert its allies.",
+  "spritesheetPath": "spritesheet.webp"
+}

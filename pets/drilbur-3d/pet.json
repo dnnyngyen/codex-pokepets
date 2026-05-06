@@ -1,0 +1,6 @@
+{
+  "id": "drilbur-3d",
+  "displayName": "Drilbur (3D)",
+  "description": "It can dig through the ground at a speed of 30 mph. It could give a car running aboveground a good race.",
+  "spritesheetPath": "spritesheet.webp"
+}

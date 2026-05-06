@@ -1,0 +1,6 @@
+{
+  "id": "manectric",
+  "displayName": "Manectric",
+  "description": "It discharges electricity from its mane. It creates a thundercloud overhead to drop lightning bolts.",
+  "spritesheetPath": "spritesheet.webp"
+}

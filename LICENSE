@@ -1,0 +1,105 @@
+codex-pokepets License
+=======================
+
+This repository contains two distinct kinds of material with different
+terms. Both are covered by this single file.
+
+--------------------------------------------------------------------------
+Part 1 — Install scripts and registry metadata (MIT License)
+--------------------------------------------------------------------------
+
+Copyright (c) 2025 Danny Nguyen
+
+The "Code Material" covered by this section consists of:
+  - the install script (install-pet.sh)
+  - the pet metadata files (pets/<slug>/pet.json)
+  - the registry (pets.json)
+  - the documentation (README.md, AGENTS.md)
+  - any other text or JSON file in this repository that does not embed
+    Pokémon character art
+
+Permission is hereby granted, free of charge, to any person obtaining a
+copy of the Code Material, to deal in the Code Material without
+restriction, including without limitation the rights to use, copy,
+modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Code Material, and to permit persons to whom the Code Material is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included
+in all copies or substantial portions of the Code Material.
+
+THE CODE MATERIAL IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE CODE
+MATERIAL OR THE USE OR OTHER DEALINGS IN THE CODE MATERIAL.
+
+--------------------------------------------------------------------------
+Part 2 — Pet sprite imagery (fan-use, derivative of third-party art)
+--------------------------------------------------------------------------
+
+The "Sprite Material" covered by this section consists of:
+  - every spritesheet.webp file under pets/<slug>/
+  - every preview.gif file under pets/<slug>/
+  - assets/hero.gif and any other rendered showcase image
+  - any other file in this repository that visibly contains Pokémon
+    character art
+
+The Sprite Material is a derivative work of two third-party animated
+sprite sets:
+  - Pokémon Black & White animated sprites originally produced by
+    Game Freak, Creatures Inc., and Nintendo for the Pokémon video
+    games (2010–2012), obtained from the public PokeAPI/sprites
+    repository (https://github.com/PokeAPI/sprites), which has hosted
+    them openly since 2014. Used for the 2D pets (Gen 1–5).
+  - Pokémon Showdown community-animated sprites
+    (https://play.pokemonshowdown.com/sprites/ani/), publicly hosted.
+    Used for the 3D pets (Gen 1–9, slug suffix `-3d`).
+
+Each source GIF was transformed into a Codex-compatible sprite atlas
+using deterministic frame operations; no new sprite art was generated,
+and every pixel in the output traces back to the original third-party
+sprite sets.
+
+  Pokémon and all related sprite art © Nintendo / Game Freak /
+  Creatures Inc.
+
+Pokémon, Pokémon character names, and all character sprites are
+trademarks and copyright of Nintendo, Game Freak, and The Pokémon
+Company. This project is a fan work and is NOT affiliated with,
+endorsed by, or sponsored by any of those companies.
+
+The MIT terms in Part 1 do NOT apply to the Sprite Material. The MIT
+license cannot grant permission for material the author does not own.
+Use of the Sprite Material is permitted only under the limited fan-use
+terms below.
+
+Permitted use of the Sprite Material:
+  - Personal Codex pet companions (private installation in
+    ~/.codex/pets/)
+  - Non-commercial fan tooling and personal projects
+  - Educational demonstrations of sprite-pipeline techniques
+
+Not permitted use of the Sprite Material:
+  - Commercial products or paid services
+  - Merchandise of any kind
+  - Bulk redistribution as your own pet pack
+  - Inclusion in projects that monetize Pokémon imagery
+
+Removal requests:
+  If you represent Nintendo, Game Freak, or Creatures Inc. and want
+  this repository taken down, open an issue on the repository or
+  contact the maintainer directly. The Code Material covered by Part 1
+  will remain; only the Sprite Material will be removed.
+
+--------------------------------------------------------------------------
+Summary
+--------------------------------------------------------------------------
+
+  - Use, fork, or remix the install scripts and registry metadata
+    freely under MIT.
+  - Use the prebuilt sprite atlases only for personal, non-commercial
+    Codex companions.
+  - All Pokémon imagery remains the property of its original owners.

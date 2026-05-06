@@ -1,0 +1,6 @@
+{
+  "id": "geodude",
+  "displayName": "Geodude",
+  "description": "At rest, it looks just like a rock. Carelessly stepping on it will make it swing its fists angrily.",
+  "spritesheetPath": "spritesheet.webp"
+}

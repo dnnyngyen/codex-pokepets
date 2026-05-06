@@ -1,0 +1,6 @@
+{
+  "id": "magnemite",
+  "displayName": "Magnemite",
+  "description": "The faster the units at its sides rotate, the greater the magnetic force they generate.",
+  "spritesheetPath": "spritesheet.webp"
+}

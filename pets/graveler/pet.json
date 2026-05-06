@@ -1,0 +1,6 @@
+{
+  "id": "graveler",
+  "displayName": "Graveler",
+  "description": "It rolls on mountain paths to move. Once it builds momentum, no Pok\u00e9mon can stop it without difficulty.",
+  "spritesheetPath": "spritesheet.webp"
+}

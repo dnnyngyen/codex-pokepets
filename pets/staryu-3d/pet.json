@@ -1,0 +1,6 @@
+{
+  "id": "staryu-3d",
+  "displayName": "Staryu (3D)",
+  "description": "If its body is torn, it can grow back if the red core remains. The core flashes at midnight.",
+  "spritesheetPath": "spritesheet.webp"
+}

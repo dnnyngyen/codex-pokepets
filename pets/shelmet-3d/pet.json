@@ -1,0 +1,6 @@
+{
+  "id": "shelmet-3d",
+  "displayName": "Shelmet (3D)",
+  "description": "When attacked, it defends itself by closing the lid of its shell. It can spit a sticky, poisonous liquid.",
+  "spritesheetPath": "spritesheet.webp"
+}

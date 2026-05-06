@@ -1,0 +1,6 @@
+{
+  "id": "swellow-3d",
+  "displayName": "Swellow (3D)",
+  "description": "It circles the sky in search of prey. When it spots one, it dives steeply to catch the prey.",
+  "spritesheetPath": "spritesheet.webp"
+}

@@ -1,0 +1,10 @@
+# Personal punch list for deferred awesome-codex-pet submission work
+TODO-awesome-codex-pet.md
+
+# Editor / IDE / agent state
+.serena/
+.claude/
+.codex/
+
+# OS
+.DS_Store

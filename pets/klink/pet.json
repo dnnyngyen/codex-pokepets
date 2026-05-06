@@ -1,0 +1,6 @@
+{
+  "id": "klink",
+  "displayName": "Klink",
+  "description": "The two minigears that mesh together are predetermined. Each will rebound from other minigears without meshing.",
+  "spritesheetPath": "spritesheet.webp"
+}

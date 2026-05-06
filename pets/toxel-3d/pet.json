@@ -1,0 +1,6 @@
+{
+  "id": "toxel-3d",
+  "displayName": "Toxel (3D)",
+  "description": "It stores poison in an internal poison sac and secretes that poison through its skin. If you touch this Pok\u00e9mon, a tingling sensation follows.",
+  "spritesheetPath": "spritesheet.webp"
+}

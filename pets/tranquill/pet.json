@@ -1,0 +1,6 @@
+{
+  "id": "tranquill",
+  "displayName": "Tranquill",
+  "description": "It can return to its Trainer\u2019s location regardless of the distance separating them.",
+  "spritesheetPath": "spritesheet.webp"
+}

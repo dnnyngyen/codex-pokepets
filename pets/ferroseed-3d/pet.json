@@ -1,0 +1,6 @@
+{
+  "id": "ferroseed-3d",
+  "displayName": "Ferroseed (3D)",
+  "description": "When threatened, it attacks by shooting a barrage of spikes, which gives it a chance to escape by rolling away.",
+  "spritesheetPath": "spritesheet.webp"
+}

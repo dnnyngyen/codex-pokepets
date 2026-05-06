@@ -1,0 +1,6 @@
+{
+  "id": "zigzagoon",
+  "displayName": "Zigzagoon",
+  "description": "It walks in zigzag fashion. It is good at finding items in the grass and even in the ground.",
+  "spritesheetPath": "spritesheet.webp"
+}

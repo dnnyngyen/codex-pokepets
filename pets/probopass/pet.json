@@ -1,0 +1,6 @@
+{
+  "id": "probopass",
+  "displayName": "Probopass",
+  "description": "It freely controls three small units called Mini-Noses using magnetic force.",
+  "spritesheetPath": "spritesheet.webp"
+}

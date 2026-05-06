@@ -1,0 +1,6 @@
+{
+  "id": "binacle-3d",
+  "displayName": "Binacle (3D)",
+  "description": "Two Binacle live together on one rock. When they fight, one of them will move to a different rock.",
+  "spritesheetPath": "spritesheet.webp"
+}
