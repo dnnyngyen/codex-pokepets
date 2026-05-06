@@ -7,6 +7,12 @@
 
 # Codex PokéPets
 
+<p align="center">
+  <a href="pets/"><img src="https://img.shields.io/badge/pets-1738-ff5d5d" alt="1738 pets"></a>
+  <a href="#"><img src="https://img.shields.io/badge/Pok%C3%A9mon-Gen%201--9-3b82f6" alt="Pokémon Gen 1-9"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT%20%2B%20fan--use-yellow" alt="License: MIT + fan-use"></a>
+</p>
+
 <p align="center"><img src="assets/hero.gif" alt="codex-pokepets hero" width="640"></p>
 
 **Every Pokémon as a [Codex](https://github.com/openai/codex) pet**,
