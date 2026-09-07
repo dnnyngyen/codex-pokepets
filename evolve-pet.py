@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Show a local Pokémon companion that evolves with a Codex session's context."""
+"""Show a local Pokémon that loses evolutions as context fills and recovers after compaction."""
 
 import argparse
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -74,6 +74,8 @@ def make_handler(reader):
                 self.respond(json.dumps(state).encode(), "application/json")
             elif self.path in assets:
                 self.respond(assets[self.path].read_bytes(), "image/gif")
+            elif self.path == "/pokeball.svg":
+                self.respond((ROOT / "assets" / "pokeball.svg").read_bytes(), "image/svg+xml")
             elif self.path == "/favicon.ico":
                 self.respond(b"", "image/x-icon", 204)
             else:
@@ -87,14 +89,16 @@ def main():
     parser.add_argument("starter", nargs="?", choices=sorted(CHAINS), default="charmander")
     parser.add_argument("--session", required=True, help="rollout JSONL path or Codex session UUID")
     parser.add_argument("--style", choices=("2d", "3d"), default="2d")
-    parser.add_argument("--thresholds", nargs=2, type=int, default=(33, 66), metavar=("FIRST", "FINAL"),
-                        help="context percentages at which to evolve (default: 33 66)")
+    parser.add_argument("--thresholds", nargs=2, type=int, default=(33, 66), metavar=("FIRST", "SECOND"),
+                        help="context percentages at which to lose an evolution (default: 33 66)")
+    parser.add_argument("--ball-at", type=int, default=90,
+                        help="context percentage at which to enter a Poké Ball (default: 90)")
     parser.add_argument("--port", type=int, default=0, help="local port (default: choose a free port)")
     args = parser.parse_args()
     try:
         if not 0 <= args.port <= 65535:
             raise ValueError("port must be between 0 and 65535")
-        pet = Evolution(resolve_chain(args.starter, args.style), args.thresholds)
+        pet = Evolution(resolve_chain(args.starter, args.style), args.thresholds, args.ball_at)
         reader = RolloutReader(resolve_session(args.session), pet)
         reader.poll()
         handler = make_handler(reader)

@@ -1,8 +1,10 @@
 codex-pokepets License
 =======================
 
-This repository contains two distinct kinds of material with different
-terms. Both are covered by this single file.
+This repository contains material with different terms, described below.
+PokeAPI-derived research data in docs/evolution-ranges.csv also retains the
+upstream terms in docs/POKEAPI-LICENSE.md; the MIT grant below does not replace
+those terms.
 
 --------------------------------------------------------------------------
 Part 1 — Install scripts and registry metadata (MIT License)

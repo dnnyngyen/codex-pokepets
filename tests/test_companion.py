@@ -71,12 +71,16 @@ class ServerTests(unittest.TestCase):
         self.assertNotIn("Access-Control-Allow-Origin", headers)
         self.assertNotIn(b"PRIVATE TRANSCRIPT", body)
         self.assertIsNone(json.loads(body)["percent"])
-        for tokens, slug in [(100, "charmander"), (330, "charmeleon"), (660, "charizard"), (50, "charizard")]:
+        self.assertEqual(json.loads(body)["slug"], "charizard")
+        for tokens, slug, in_ball in [(100, "charizard", False), (330, "charmeleon", False),
+                                     (660, "charmander", False), (900, "charmander", True),
+                                     (50, "charizard", False)]:
             with self.path.open("a") as stream:
                 stream.write(json.dumps(token_event(tokens)) + "\n")
             state = json.loads(self.get("/state.json")[2])
             self.assertEqual(state["slug"], slug)
             self.assertEqual(state["tokens"], tokens)
+            self.assertEqual(state["in_ball"], in_ball)
         self.path.unlink()
         state = json.loads(self.get("/state.json")[2])
         self.assertEqual(state["status"], "unavailable")
@@ -87,6 +91,9 @@ class ServerTests(unittest.TestCase):
         status, headers, body = self.get("/pets/charmander.gif")
         self.assertEqual((status, headers["Content-Type"]), (200, "image/gif"))
         self.assertTrue(body.startswith(b"GIF"))
+        status, headers, body = self.get("/pokeball.svg")
+        self.assertEqual((status, headers["Content-Type"]), (200, "image/svg+xml"))
+        self.assertIn(b"<svg", body)
         for path in ["/pets.json", "/pets/pikachu.gif", "/../README.md", "/%2e%2e/README.md", str(self.path)]:
             self.assertEqual(self.get(path)[0], 404)
         self.assertEqual(self.get("/state.json", {"Host": "attacker.example"})[0], 403)

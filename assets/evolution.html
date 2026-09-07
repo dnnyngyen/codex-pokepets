@@ -2,7 +2,7 @@
 <html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PokéPets · Context evolution</title>
+<title>PokéPets · Context companion</title>
 <style>
   :root { color-scheme: dark; font-family: ui-sans-serif, system-ui, sans-serif; color: #f3eddf; background: #171d1b; }
   * { box-sizing: border-box; }
@@ -24,44 +24,55 @@
   progress::-webkit-progress-bar { background: #354037; }
   progress::-webkit-progress-value { background: #c7df9f; transition: width .4s; }
   #tokens { color: #9baa99; font-size: 11px; margin-top: 8px; }
-  ol { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; list-style: none; padding: 0; margin: 25px 0; }
+  ol { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; list-style: none; padding: 0; margin: 25px 0; }
   li { border: 1px solid #39463d; border-radius: 12px; padding: 10px 3px; text-align: center; opacity: .5; }
-  li.reached { opacity: 1; }
-  li.current { border-color: #b4cb91; background: #2a342b; }
+  li.current { opacity: 1; border-color: #b4cb91; background: #2a342b; }
   li img { display: block; width: 64px; height: 64px; object-fit: contain; image-rendering: pixelated; margin: 0 auto 4px; }
   li strong { display: block; font-size: 11px; font-weight: 500; }
   li span { display: block; color: #acbba5; font-size: 10px; margin-top: 4px; }
   footer { border-top: 1px solid #344137; padding-top: 15px; color: #9baa99; font-size: 11px; line-height: 1.6; }
   footer p { margin: 0 0 5px; }
+  .rest { border: 1px solid #aa7960; background: #392e25; border-radius: 12px; padding: 16px; margin-bottom: 22px; font-size: 13px; line-height: 1.6; }
+  .rest strong { color: #f5d0a3; }
+  .rest p { margin: 6px 0 0; }
+  body.resting progress { accent-color: #e9ae7c; }
+  body.resting progress::-webkit-progress-value { background: #e9ae7c; }
+  @media (max-width: 420px) { li strong { font-size: 10px; } li img { width: 52px; height: 52px; } }
   @media (prefers-reduced-motion: reduce) { #pet.evolving { animation: none; } }
 </style>
 <main>
-  <header><span class="brand">PokéPets / Evolution</span><span class="badge" id="status">Connecting</span></header>
+  <header><span class="brand">PokéPets / Context</span><span class="badge" id="status">Connecting</span></header>
   <div class="scene"><img id="pet" alt="" hidden></div>
   <div aria-live="polite"><h1 id="name">Your companion</h1><p id="message">Connecting to your local Codex session…</p></div>
   <div class="usage"><label for="meter">Current context</label><span id="percent">—</span></div>
   <progress id="meter" max="100" value="0"></progress>
   <div id="tokens">Waiting for context telemetry</div>
-  <ol id="chain" aria-label="Evolution stages"></ol>
+  <ol id="chain" aria-label="Forms as context fills"></ol>
+  <aside class="rest" id="rest" role="status" hidden>
+    <strong>Time to free some context</strong>
+    <p>Compact this session in Codex, let auto-compaction finish, or start a new session. Your Pokémon returns when context usage drops.</p>
+    <p>Starting fresh? Point this companion at the new session.</p>
+  </aside>
   <footer>
-    <p>Evolution stays earned when Codex compacts context.</p>
+    <p>More context means more tokens per request. Compact to restore your companion.</p>
     <p>Local companion · Updates from one session · No data uploaded</p>
     <p>Pokémon © Nintendo / Game Freak / Creatures Inc. Fan use.</p>
   </footer>
 </main>
 <script>
   const el = id => document.getElementById(id);
-  let previousSlug = null;
+  let previousForm = null;
   const number = n => n.toLocaleString();
   async function update() {
     try {
       const response = await fetch('/state.json', {cache: 'no-store', signal: AbortSignal.timeout(5000)});
       if (!response.ok) throw new Error('Unavailable');
       const state = await response.json();
-      const changed = previousSlug !== null && state.slug !== previousSlug;
-      if (previousSlug !== state.slug) {
-        el('pet').src = '/pets/' + state.slug + '.gif';
-        el('pet').alt = state.names[state.slug];
+      const form = state.in_ball ? 'pokeball' : state.slug;
+      const changed = previousForm !== null && form !== previousForm;
+      if (previousForm !== form) {
+        el('pet').src = state.in_ball ? '/pokeball.svg' : '/pets/' + state.slug + '.gif';
+        el('pet').alt = state.in_ball ? 'Poké Ball' : state.names[state.slug];
         el('pet').hidden = false;
         if (changed) {
           el('pet').classList.remove('evolving');
@@ -69,41 +80,49 @@
           el('pet').classList.add('evolving');
         }
       }
-      previousSlug = state.slug;
-      el('name').textContent = state.names[state.slug];
+      previousForm = form;
+      el('name').textContent = state.in_ball ? 'Resting in a Poké Ball' : state.names[state.slug];
       const known = state.percent !== null;
-      el('status').textContent = state.status === 'unavailable' ? 'Session unavailable' : known ? 'Watching locally' : 'Waiting for usage';
+      el('status').textContent = state.status === 'unavailable' ? 'Session unavailable' : !known ? 'Waiting for usage' : state.in_ball ? 'Context nearly full' : 'Watching locally';
+      const pressure = state.chain.length - 1 - state.stage;
       el('message').textContent = state.status === 'unavailable'
         ? 'Session file unavailable. Retrying automatically…'
         : !known ? 'Waiting for the first context-usage update…'
-        : state.stage === state.chain.length - 1 ? 'Fully evolved. Keep building together.'
-        : 'Next: ' + state.names[state.chain[state.stage + 1]] + ' at ' + state.thresholds[state.stage] + '% context';
+        : state.in_ball ? 'Context is nearly full. Give your companion room to recover.'
+        : state.stage === 0 ? 'Next: Poké Ball at ' + state.ball_at + '% context. Consider compacting soon.'
+        : 'Next: ' + state.names[state.chain[state.stage - 1]] + ' at ' + state.thresholds[pressure] + '% context';
+      el('rest').hidden = !state.in_ball || state.status !== 'watching';
+      document.body.classList.toggle('resting', state.in_ball);
       el('percent').textContent = known ? state.percent.toFixed(1) + '%' : '—';
       el('meter').value = known ? state.percent : 0;
       el('meter').setAttribute('aria-valuetext', known ? state.percent.toFixed(1) + '% context used' : 'Context usage unknown');
       el('tokens').textContent = known ? number(state.tokens) + ' / ' + number(state.window) + ' tokens · Latest request' : 'Waiting for context telemetry';
       if (!el('chain').children.length) {
-        state.chain.forEach((slug, index) => {
+        const forms = [...state.chain].reverse().concat('pokeball');
+        const starts = [0, ...state.thresholds, state.ball_at];
+        forms.forEach((slug, index) => {
           const item = document.createElement('li');
           const image = document.createElement('img');
-          image.src = '/pets/' + slug + '.gif';
+          image.src = slug === 'pokeball' ? '/pokeball.svg' : '/pets/' + slug + '.gif';
           image.alt = '';
           const name = document.createElement('strong');
-          name.textContent = state.names[slug];
+          name.textContent = slug === 'pokeball' ? 'Poké Ball' : state.names[slug];
           const threshold = document.createElement('span');
-          threshold.textContent = index === 0 ? 'Your starter' : state.thresholds[index - 1] + '% context';
+          threshold.textContent = starts[index] + '% context';
           item.append(image, name, threshold);
           el('chain').append(item);
         });
       }
       Array.from(el('chain').children).forEach((item, index) => {
-        item.className = (index <= state.stage ? 'reached ' : '') + (index === state.stage ? 'current' : '');
-        if (index === state.stage) item.setAttribute('aria-current', 'step');
+        const current = index === (state.in_ball ? state.chain.length : pressure);
+        item.className = current ? 'current' : '';
+        if (current) item.setAttribute('aria-current', 'step');
         else item.removeAttribute('aria-current');
       });
     } catch {
       el('status').textContent = 'Disconnected';
       el('message').textContent = 'Keep the companion terminal open. Retrying automatically…';
+      el('rest').hidden = true;
     } finally {
       setTimeout(update, 1000);
     }

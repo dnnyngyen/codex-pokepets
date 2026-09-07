@@ -101,9 +101,13 @@ local browser companion. It does not change the Codex pet contract or install
 anything. The supported chains are the three Kanto starters, in either style.
 
 Use the latest request's `last_token_usage.total_tokens / model_context_window`,
-never cumulative usage. Default thresholds are inclusive 33% and 66%. Keep the
-highest stage within the selected session across compaction; recover it by
-replaying the log on restart. Missing telemetry is unknown, not zero.
+never cumulative usage. Start fully evolved, lose a stage at inclusive 33% and
+66%, and enter a Poké Ball at 90% (configurable with `--ball-at`, e.g. 95).
+Use current usage, not a historical maximum: compaction restores the matching
+form on the next valid usage update. Replay logs to recover the latest state on
+restart. Missing telemetry is unknown, not zero; show the fully evolved form
+while waiting. The ball view prompts compaction or a new session but does not
+run compaction itself. `assets/pokeball.svg` is a UI icon, not a pet atlas.
 
 Keep the server loopback-only and restrict responses to usage state and the
 selected chain's assets; never serve rollout contents or arbitrary local files.
