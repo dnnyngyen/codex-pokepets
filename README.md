@@ -86,6 +86,72 @@ curl -fsSL https://raw.githubusercontent.com/dnnyngyen/codex-pokepets/main/insta
 Then restart Codex and pick your pet in **Settings → Appearance → Pets**.
 To uninstall: `rm -rf ~/.codex/pets/<slug>`.
 
+## Watch your context (local companion)
+
+Your Pokémon starts fully evolved and loses evolutions as context fills:
+**Charizard → Charmeleon at 33% → Charmander at 66% → Poké Ball at 90%**.
+Bulbasaur and Squirtle evolution lines are also available, in both 2D and 3D.
+
+<p><img src="assets/evolution-preview.png" width="400" alt="Local context companion resting in a Poké Ball at 90% usage, prompting compaction or a new session"></p>
+
+The Poké Ball is a reminder to compact in Codex, allow auto-compaction to finish,
+or start a new session. As soon as reported usage drops, the matching form returns
+(for example, back to Charizard below 33%). This companion observes usage; it does
+not run compaction. **Context fullness is not a response-quality score.**
+
+This opt-in companion runs in a **local browser window**, using the existing
+animated previews. It does **not** change the built-in Codex pet overlay:
+the [custom pet contract](https://github.com/openai/skills/blob/main/skills/.curated/hatch-pet/references/codex-pet-contract.md)
+has no context-usage callback. Ordinary pet installs still work as before.
+
+Clone the pack and start the companion with Python 3.9+ (no packages to install):
+
+```bash
+git clone https://github.com/dnnyngyen/codex-pokepets.git
+cd codex-pokepets
+python3 evolve-pet.py charmander --session <session-uuid>
+```
+
+Open the `http://127.0.0.1:...` URL printed in the terminal. Keep the terminal
+running; press **Ctrl+C** to stop. The browser updates once per second while open.
+
+Use a session UUID from Codex's `/status` output (where available), or pass the
+full path to that session's `rollout-*.jsonl` file under
+`${CODEX_HOME:-$HOME/.codex}/sessions/YYYY/MM/DD/`. For example:
+
+```bash
+python3 evolve-pet.py squirtle --style 3d --session /path/to/rollout-session.jsonl
+python3 evolve-pet.py bulbasaur --session <session-uuid> --thresholds 25 75 --ball-at 95
+```
+
+Each process follows **only the session you select**; open another process for
+another session. The starter argument chooses the family: `charmander` begins as
+Charizard. After starting a new Codex session, relaunch with its UUID/path.
+The companion reads that file locally and serves only usage numbers and pet
+assets on loopback. It does not upload data, serve conversation text, modify
+Codex settings, install pets, or need API credentials.
+
+Evolution uses `last_token_usage.total_tokens / model_context_window` from
+Codex's `event_msg` → `token_count` records. This is the latest reported request's
+context estimate, **not cumulative session spending**. It may differ from Codex's
+displayed percentage, which can reserve baseline tokens. Thresholds are inclusive;
+the form follows current usage after compaction or a model switch. Restarting the
+companion replays that session's history to recover its latest state. A different
+session starts fresh. Unknown usage shows the final form with a waiting indicator;
+ephemeral sessions and
+sessions without `token_count` telemetry cannot drive evolution. Rollout records
+are an internal Codex format and may change between releases.
+
+For the full-pack evolution and stats exploration, see
+[evolution research](docs/evolution-research.md). Its proposed stat-based bands
+are separate from this first implementation's configurable context thresholds.
+
+Run the companion's tests with:
+
+```bash
+python3 -m unittest discover -s tests -v
+```
+
 ## Featured pets
 
 ### 2D (Gen 1–5, PokeAPI BW animated)
