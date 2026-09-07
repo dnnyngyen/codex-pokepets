@@ -23,6 +23,10 @@ codex-pokepets/
 ├── pets.json                   # top-level registry (schema v4)
 ├── assets/hero.gif             # README header image (animated 4×3 pet grid)
 ├── install-pet.sh              # the only installer — curl-pipe-bash, fetches per-pet
+├── evolve-pet.py               # opt-in loopback browser companion (Python stdlib)
+├── evolution.py                # context policy + incremental rollout reader
+├── assets/evolution.html       # local companion UI; reuses existing preview GIFs
+├── tests/                      # companion policy, reader, and HTTP tests
 ├── README.md
 ├── LICENSE                     # MIT for install scripts + registry; fan-use for sprite imagery
 └── AGENTS.md
@@ -89,6 +93,22 @@ Resolution rules (no flags, pure positional):
 | Multiple names | Each resolves independently, results deduped |
 
 Implementation: Python snippet against `pets.json`. A name that exactly matches a 2D base species expands to its 2D family. A name that exactly matches a 3D / form / form-3d entry installs only that. A name that doesn't match any slug but matches a `species_slug` (the Gen 6+ case) expands via that mapping.
+
+## Local context evolution
+
+`python3 evolve-pet.py <starter> --session <UUID-or-rollout-path>` runs a separate
+local browser companion. It does not change the Codex pet contract or install
+anything. The supported chains are the three Kanto starters, in either style.
+
+Use the latest request's `last_token_usage.total_tokens / model_context_window`,
+never cumulative usage. Default thresholds are inclusive 33% and 66%. Keep the
+highest stage within the selected session across compaction; recover it by
+replaying the log on restart. Missing telemetry is unknown, not zero.
+
+Keep the server loopback-only and restrict responses to usage state and the
+selected chain's assets; never serve rollout contents or arbitrary local files.
+No third-party runtime dependencies. Validate with
+`python3 -m unittest discover -s tests -v`.
 
 ## Source attribution
 

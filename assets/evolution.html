@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PokéPets · Context evolution</title>
+<style>
+  :root { color-scheme: dark; font-family: ui-sans-serif, system-ui, sans-serif; color: #f3eddf; background: #171d1b; }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+  main { width: min(100%, 480px); }
+  header { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .brand { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; }
+  .badge { font-size: 11px; color: #b6c7b2; border: 1px solid #465448; padding: 6px 9px; border-radius: 20px; }
+  .scene { position: relative; height: 245px; display: grid; place-items: center; margin-top: 20px; border-radius: 24px; background: radial-gradient(ellipse at 50% 90%, #40503c 0%, #242e26 45%, #1d2521 75%); overflow: hidden; }
+  .scene::after { content: ''; position: absolute; bottom: 34px; width: 150px; height: 18px; border-radius: 50%; background: #0e151855; }
+  #pet { width: 160px; height: 160px; object-fit: contain; image-rendering: pixelated; position: relative; z-index: 1; }
+  #pet.evolving { animation: evolve .8s ease-out; }
+  @keyframes evolve { 40% { filter: brightness(4); transform: scale(.85); } 70% { transform: scale(1.1); } }
+  h1 { margin: 23px 0 5px; font-size: 30px; letter-spacing: -.04em; }
+  #message { color: #bac5b7; margin: 0 0 25px; font-size: 14px; min-height: 20px; }
+  .usage { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 9px; }
+  #percent { color: #d8edb7; font-variant-numeric: tabular-nums; }
+  progress { display: block; width: 100%; height: 7px; border: 0; border-radius: 8px; overflow: hidden; background: #354037; accent-color: #c7df9f; }
+  progress::-webkit-progress-bar { background: #354037; }
+  progress::-webkit-progress-value { background: #c7df9f; transition: width .4s; }
+  #tokens { color: #9baa99; font-size: 11px; margin-top: 8px; }
+  ol { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; list-style: none; padding: 0; margin: 25px 0; }
+  li { border: 1px solid #39463d; border-radius: 12px; padding: 10px 3px; text-align: center; opacity: .5; }
+  li.reached { opacity: 1; }
+  li.current { border-color: #b4cb91; background: #2a342b; }
+  li img { display: block; width: 64px; height: 64px; object-fit: contain; image-rendering: pixelated; margin: 0 auto 4px; }
+  li strong { display: block; font-size: 11px; font-weight: 500; }
+  li span { display: block; color: #acbba5; font-size: 10px; margin-top: 4px; }
+  footer { border-top: 1px solid #344137; padding-top: 15px; color: #9baa99; font-size: 11px; line-height: 1.6; }
+  footer p { margin: 0 0 5px; }
+  @media (prefers-reduced-motion: reduce) { #pet.evolving { animation: none; } }
+</style>
+<main>
+  <header><span class="brand">PokéPets / Evolution</span><span class="badge" id="status">Connecting</span></header>
+  <div class="scene"><img id="pet" alt="" hidden></div>
+  <div aria-live="polite"><h1 id="name">Your companion</h1><p id="message">Connecting to your local Codex session…</p></div>
+  <div class="usage"><label for="meter">Current context</label><span id="percent">—</span></div>
+  <progress id="meter" max="100" value="0"></progress>
+  <div id="tokens">Waiting for context telemetry</div>
+  <ol id="chain" aria-label="Evolution stages"></ol>
+  <footer>
+    <p>Evolution stays earned when Codex compacts context.</p>
+    <p>Local companion · Updates from one session · No data uploaded</p>
+    <p>Pokémon © Nintendo / Game Freak / Creatures Inc. Fan use.</p>
+  </footer>
+</main>
+<script>
+  const el = id => document.getElementById(id);
+  let previousSlug = null;
+  const number = n => n.toLocaleString();
+  async function update() {
+    try {
+      const response = await fetch('/state.json', {cache: 'no-store', signal: AbortSignal.timeout(5000)});
+      if (!response.ok) throw new Error('Unavailable');
+      const state = await response.json();
+      const changed = previousSlug !== null && state.slug !== previousSlug;
+      if (previousSlug !== state.slug) {
+        el('pet').src = '/pets/' + state.slug + '.gif';
+        el('pet').alt = state.names[state.slug];
+        el('pet').hidden = false;
+        if (changed) {
+          el('pet').classList.remove('evolving');
+          void el('pet').offsetWidth;
+          el('pet').classList.add('evolving');
+        }
+      }
+      previousSlug = state.slug;
+      el('name').textContent = state.names[state.slug];
+      const known = state.percent !== null;
+      el('status').textContent = state.status === 'unavailable' ? 'Session unavailable' : known ? 'Watching locally' : 'Waiting for usage';
+      el('message').textContent = state.status === 'unavailable'
+        ? 'Session file unavailable. Retrying automatically…'
+        : !known ? 'Waiting for the first context-usage update…'
+        : state.stage === state.chain.length - 1 ? 'Fully evolved. Keep building together.'
+        : 'Next: ' + state.names[state.chain[state.stage + 1]] + ' at ' + state.thresholds[state.stage] + '% context';
+      el('percent').textContent = known ? state.percent.toFixed(1) + '%' : '—';
+      el('meter').value = known ? state.percent : 0;
+      el('meter').setAttribute('aria-valuetext', known ? state.percent.toFixed(1) + '% context used' : 'Context usage unknown');
+      el('tokens').textContent = known ? number(state.tokens) + ' / ' + number(state.window) + ' tokens · Latest request' : 'Waiting for context telemetry';
+      if (!el('chain').children.length) {
+        state.chain.forEach((slug, index) => {
+          const item = document.createElement('li');
+          const image = document.createElement('img');
+          image.src = '/pets/' + slug + '.gif';
+          image.alt = '';
+          const name = document.createElement('strong');
+          name.textContent = state.names[slug];
+          const threshold = document.createElement('span');
+          threshold.textContent = index === 0 ? 'Your starter' : state.thresholds[index - 1] + '% context';
+          item.append(image, name, threshold);
+          el('chain').append(item);
+        });
+      }
+      Array.from(el('chain').children).forEach((item, index) => {
+        item.className = (index <= state.stage ? 'reached ' : '') + (index === state.stage ? 'current' : '');
+        if (index === state.stage) item.setAttribute('aria-current', 'step');
+        else item.removeAttribute('aria-current');
+      });
+    } catch {
+      el('status').textContent = 'Disconnected';
+      el('message').textContent = 'Keep the companion terminal open. Retrying automatically…';
+    } finally {
+      setTimeout(update, 1000);
+    }
+  }
+  update();
+</script>
+</html>
