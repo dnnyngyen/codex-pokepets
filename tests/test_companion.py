@@ -20,6 +20,7 @@ spec.loader.exec_module(companion)
 
 class SessionTests(unittest.TestCase):
     def test_explicit_path_and_missing_session(self):
+        """Accept existing explicit rollouts and reject paths that cannot be resolved."""
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "rollout.jsonl"
             path.touch()
@@ -28,6 +29,7 @@ class SessionTests(unittest.TestCase):
                 companion.resolve_session(str(path) + ".missing")
 
     def test_uuid_respects_codex_home(self):
+        """Find a UUID inside the configured Codex home instead of another session tree."""
         with tempfile.TemporaryDirectory() as directory:
             session_id = "11111111-2222-3333-4444-555555555555"
             path = Path(directory) / "sessions" / "2026" / ("rollout-date-" + session_id + ".jsonl")
@@ -39,6 +41,7 @@ class SessionTests(unittest.TestCase):
 
 class ServerTests(unittest.TestCase):
     def setUp(self):
+        """Start an isolated loopback server over a temporary rollout containing private text."""
         self.directory = tempfile.TemporaryDirectory()
         self.addCleanup(self.directory.cleanup)
         self.path = Path(self.directory.name) / "rollout.jsonl"
@@ -51,11 +54,13 @@ class ServerTests(unittest.TestCase):
         self.addCleanup(self.stop_server)
 
     def stop_server(self):
+        """Stop and close the test server before its temporary files are removed."""
         self.server.shutdown()
         self.thread.join()
         self.server.server_close()
 
     def get(self, path, headers=None):
+        """Fetch one route and close the connection after collecting its response."""
         connection = HTTPConnection("127.0.0.1", self.server.server_port, timeout=3)
         try:
             connection.request("GET", path, headers=headers or {})
@@ -65,6 +70,7 @@ class ServerTests(unittest.TestCase):
             connection.close()
 
     def test_live_evolution_and_privacy(self):
+        """Serve usage-driven forms and availability status without exposing transcript text."""
         status, headers, body = self.get("/state.json")
         self.assertEqual(status, 200)
         self.assertEqual(headers["Cache-Control"], "no-store")
@@ -86,7 +92,18 @@ class ServerTests(unittest.TestCase):
         self.assertEqual(state["status"], "unavailable")
         self.assertEqual(state["slug"], "charizard")
 
+    def test_large_telemetry_returns_state(self):
+        """The state endpoint remains available after oversized token snapshots."""
+        for tokens, window, expected in [(10**1000, 1, 100),
+                                         (10**1000, 10**1001, 10)]:
+            with self.path.open("a") as stream:
+                stream.write(json.dumps(token_event(tokens, window)) + "\n")
+            status, _, body = self.get("/state.json")
+            self.assertEqual(status, 200)
+            self.assertEqual(json.loads(body)["percent"], expected)
+
     def test_assets_and_restricted_routes(self):
+        """Serve intended visuals while rejecting unrelated files, traversal, and foreign hosts."""
         self.assertEqual(self.get("/")[0], 200)
         status, headers, body = self.get("/pets/charmander.gif")
         self.assertEqual((status, headers["Content-Type"]), (200, "image/gif"))

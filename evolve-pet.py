@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parent
 
 
 def resolve_session(value):
+    """Resolve an existing rollout path or a unique UUID under the Codex sessions directory."""
     path = Path(value).expanduser()
     if path.is_file():
         return path.resolve()
@@ -29,6 +30,7 @@ def resolve_session(value):
 
 
 def make_handler(reader):
+    """Create a handler restricted to this session state and the selected pet assets."""
     chain = reader.evolution.chain
     lock = threading.Lock()
     names = {
@@ -42,9 +44,11 @@ def make_handler(reader):
 
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *args):
+            """Suppress routine access logs from the continuously polling browser."""
             pass
 
         def respond(self, body, content_type, status=200):
+            """Send a complete response with cache prevention and browser security headers."""
             self.send_response(status)
             self.send_header("Content-Type", content_type)
             self.send_header("Content-Length", str(len(body)))
@@ -56,6 +60,7 @@ def make_handler(reader):
 
         def do_GET(self):
             # Bind to loopback and reject DNS-rebinding hosts. No session text is served.
+            """Validate the loopback Host and serve only explicitly allowed resources."""
             expected_host = "127.0.0.1:" + str(self.server.server_port)
             if self.headers.get("Host") != expected_host:
                 self.respond(b"Invalid host", "text/plain", 403)
@@ -85,6 +90,7 @@ def make_handler(reader):
 
 
 def main():
+    """Parse companion options, replay the selected session, and serve until interrupted."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("starter", nargs="?", choices=sorted(CHAINS), default="charmander")
     parser.add_argument("--session", required=True, help="rollout JSONL path or Codex session UUID")

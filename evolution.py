@@ -13,6 +13,7 @@ CHAINS = {
 
 
 def resolve_chain(starter, style):
+    """Return the family in earliest-to-final order using the requested sprite style."""
     suffix = "-3d" if style == "3d" else ""
     return tuple(species + suffix for species in CHAINS[starter])
 
@@ -42,6 +43,7 @@ class Evolution:
     """Current context pressure determines form; compaction restores stronger forms."""
 
     def __init__(self, chain, thresholds=(33, 66), ball_at=90):
+        """Validate ordered thresholds and initialize a fully evolved, unmeasured pet."""
         if not thresholds or len(chain) != len(thresholds) + 1:
             raise ValueError("need one threshold for each evolution")
         if any(type(n) is not int or not 0 < n <= 100 for n in thresholds):
@@ -56,12 +58,14 @@ class Evolution:
         self.reset()
 
     def reset(self):
+        """Clear usage when beginning or replaying a rollout."""
         self.stage = len(self.chain) - 1
         self.in_ball = False
         self.tokens = None
         self.window = None
 
     def consume(self, event):
+        """Apply a valid usage snapshot; leave state unchanged for unrelated records."""
         usage = context_usage(event)
         if usage is None:
             return
@@ -71,6 +75,7 @@ class Evolution:
         self.in_ball = self.tokens * 100 >= self.window * self.ball_at
 
     def snapshot(self):
+        """Return display state with an unknown or safely bounded usage percentage."""
         return {
             "slug": self.chain[self.stage],
             "stage": self.stage,
@@ -80,7 +85,11 @@ class Evolution:
             "in_ball": self.in_ball,
             "tokens": self.tokens,
             "window": self.window,
-            "percent": None if self.tokens is None else min(100, self.tokens * 100 / self.window),
+            "percent": (
+                None if self.tokens is None
+                else 100 if self.tokens >= self.window
+                else self.tokens / self.window * 100
+            ),
         }
 
 
@@ -88,12 +97,14 @@ class RolloutReader:
     """Read complete appended lines; retain partial records until their newline."""
 
     def __init__(self, path, evolution):
+        """Track the selected file and its last complete record offset."""
         self.path = Path(path)
         self.evolution = evolution
         self.offset = 0
         self.identity = None
 
     def poll(self):
+        """Consume appended records, replay changed files, and defer incomplete lines."""
         with self.path.open("rb") as stream:
             stat = os.fstat(stream.fileno())
             identity = (stat.st_dev, stat.st_ino)

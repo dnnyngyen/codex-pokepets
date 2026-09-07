@@ -17,11 +17,13 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def rows(directory, name):
+    """Read a local UTF-8 CSV table into named fields."""
     with (directory / name).open(newline="", encoding="utf-8") as stream:
         return list(csv.DictReader(stream))
 
 
 def main():
+    """Join local species and stat tables with the registry to write proposed context bands."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("csv_directory", type=Path)
     args = parser.parse_args()
@@ -38,11 +40,13 @@ def main():
             children[int(entry["evolves_from_species_id"])].append(key)
 
     def leaves(key):
+        """List terminal descendants while preserving each species-level branch."""
         if not children[key]:
             return [key]
         return [leaf for child in children[key] for leaf in leaves(child)]
 
     def lineage(key):
+        """Follow parent links and return the root-to-selected-species path."""
         path = [key]
         while species[key]["evolves_from_species_id"]:
             key = int(species[key]["evolves_from_species_id"])
